@@ -1,8 +1,13 @@
 from django.shortcuts import redirect,render
+from app.models import *
 def BASE(request):
     return render(request,'base.html')
 def HOME(request):
-    return render(request,'Main/home.html')
+    category = Categories.objects.all().order_by('id')[0:5]
+    context={
+        'category':category,
+    }
+    return render(request,'Main/home.html',context)
 def SINGLE_COURSE(request):
     return render(request,'Main/single_course.html')
 def CONTACT_US(request):
